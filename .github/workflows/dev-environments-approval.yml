@@ -1,0 +1,58 @@
+name: Dev / Environments / Approval
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/dev-environments-approval.yml
+
+permissions:
+  contents: read
+
+jobs:
+  needs-approval1:
+    runs-on:
+      labels:
+        - runs-on
+        - runner=2cpu-linux-x64
+        - tag=env1-job1
+        - env=dev
+    environment:
+      name: needs-approval
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo Hello world
+
+  needs-approval2:
+    needs: [needs-approval1]
+    runs-on:
+      labels:
+        - runs-on
+        - runner=2cpu-linux-x64
+        - tag=env1-job2
+        - env=dev
+    environment:
+        name: needs-approval
+    timeout-minutes: 60
+    steps:
+        - uses: actions/checkout@v4
+        - run: echo Hello world
+
+  no-approval:
+    needs: [needs-approval1]
+    runs-on:
+      labels:
+        - runs-on
+        - runner=2cpu-linux-x64
+        - tag=env2-job3
+        - env=dev
+    environment:
+        name: no-approval
+    timeout-minutes: 60
+    steps:
+        - uses: actions/checkout@v4
+        - run: echo Hello world
+
