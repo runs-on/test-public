@@ -23,7 +23,7 @@ jobs:
       name: needs-approval
     timeout-minutes: 60
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - run: echo Hello world
 
   needs-approval2:
@@ -38,7 +38,7 @@ jobs:
         name: needs-approval
     timeout-minutes: 60
     steps:
-        - uses: actions/checkout@v4
+        - uses: actions/checkout@v6
         - run: echo Hello world
 
   no-approval:
@@ -53,6 +53,6 @@ jobs:
         name: no-approval
     timeout-minutes: 60
     steps:
-        - uses: actions/checkout@v4
+        - uses: actions/checkout@v6
         - run: echo Hello world
 
